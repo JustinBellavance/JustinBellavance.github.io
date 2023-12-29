@@ -4,8 +4,8 @@
 - Education
 - Experiences
 - Projects (TBC)
-- Skills
+- Skills (TBC)
 - Interests
 
-# Created using Bootstrap theme: 
-## [Start Bootstrap - Resume](https://startbootstrap.com/template-overviews/resume/)
+# Created using Start Bootstrap: 
+## [Start Bootstrap - Resume](https://startbootstrap.com/)
