@@ -3,8 +3,8 @@
 - Contact Information (GitHub, LinkedIn, Email)
 - Education
 - Experiences
-- Projects (TBC)
-- Skills (TBC)
+- Projects
+- Skills 
 - Interests
 
 # Created using Start Bootstrap: 
