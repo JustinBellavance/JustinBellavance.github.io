@@ -1,0 +1,113 @@
+{
+    "name": "Justin Bellavance",
+    "headerTaglineOne": "I'm Justin,",
+    "headerTaglineTwo": "Professional learner of data science, software engineering and bioinformatics",
+    "headerTaglineThree": "based in Montreal, Canada.",
+    "showCursor": false,
+    "showBlog": true,
+    "darkMode": false,
+    "showResume": true,
+    "socials": [
+        {
+            "id": "1",
+            "title": "Github",
+            "link": "https://github.com/justinbellavance"
+        },
+        {
+            "id": "2",
+            "title": "LinkedIn",
+            "link": "https://www.linkedin.com/in/justinbellavance/"
+        },
+        {
+            "id": "3",
+            "title": "Twitter / X",
+            "link": "https://x.com/justinbellavance"
+        },
+        {
+            "id": "4",
+            "title": "Blog",
+            "link": "https://https://medium.com/@justin.bellavance"
+        },
+        {
+            "id": "5",
+            "title": "Email",
+            "link": "mailto:justinbellavance@gmail.com"
+        }
+    ],
+    "projects": [
+        {
+            "id": "1",
+            "title": "Full Stack Net Worth Visualiser and Optimizer",
+            "description": "Full Stack Development, Databases, AWS",
+            "imageSrc": "https://images.unsplash.com/photo-1487837647815-bbc1f30cd0d2?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxzZWFyY2h8Njl8fHBhc3RlbHxlbnwwfHwwfA%3D%3D&auto=format&fit=crop&w=400&q=60",
+            "url": "https://github.com/JustinBellavance/KnowYourWealth"
+        },
+        {
+            "id": "2",
+            "title": "NHL Goal Prediction Tool",
+            "description": "Data Science Project that uses Machine Learning to Predict Goal probability for live games. (Currently Private)",
+            "imageSrc": "https://images.unsplash.com/photo-1605153864431-a2795a1b2f95?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MXwyNTY3ODl8fGVufDB8fHw%3D&auto=format&fit=crop&w=400&q=60",
+            "url": "https://github.com/JustinBellavance/IFT6758-A06"
+        }
+    ],
+    "aboutpara": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    "resume": {
+        "tagline": "",
+        "description": "",
+        "experiences": [
+            {
+                "id": "1",
+                "dates": "September 2023 - Present",
+                "type": "Full Time",
+                "position": "Data Science Researcher @ Montreal Heart Institute",
+                "bullets": "Developped Open-source full stack app in Vue.js and Flask, Analysed terabytes of human health data using Python and Bash"
+            },
+            {
+                "id": "2",
+                "dates": "April 2023 - September 2023",
+                "type": "Internship",
+                "position": "Data Science Intern @ Agriculture and AgriFood Canada",
+                "bullets": "Used Python and R to predict optimal genetic lines of oat of 4000+ unique genetic lines."
+            },
+            {
+                "id": "3",
+                "dates": "April 2022 - September 2022",
+                "type": "Internship",
+                "position": "Software Engineering Intern @ C3G",
+                "bullets": "Benchmarked software for speed and memory capability, Implemented optimal software in existing Python codebase"
+            }
+        ],
+        "education": [
+            {
+                "universityName": "University of Montreal",
+                "universityDate": "2023-2025",
+                "universityPara": "Master's of Bioinformatics (with Thesis)"
+            },
+            {
+                "universityName": "Carleton University",
+                "universityDate": "2019-2023",
+                "universityPara": "Bachelor's of Neuroscience & Computer Science"
+            }
+        ],
+        "languages": [
+            "Javascript",
+            "Python",
+            "SQL / NoSQL",
+            "R",
+            "Bash"
+        ],
+        "frameworks": [
+            "React",
+            "Vue.js",
+            "Typescript",
+            "Flask",
+            "FastAPI"
+        ],
+        "others": [
+            "AWS",
+            "Postgres",
+            "SQlite3",
+            "HPC Environments"
+        ]
+    }
+}
