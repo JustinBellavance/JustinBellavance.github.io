@@ -1,8 +1,9 @@
 {
     "name": "Justin Bellavance",
     "headerTaglineOne": "I'm Justin,",
-    "headerTaglineTwo": "Data enthousiast and professional learner",
-    "headerTaglineThree": "based in Montreal, Canada.",
+    "headerTaglineTwo": "Data enthousiast and ",
+    "headerTaglineThree" : "professional learner",
+    "headerTaglineFour": "based in Montreal, Canada.",
     "showCursor": false,
     "showBlog": true,
     "darkMode": false,
