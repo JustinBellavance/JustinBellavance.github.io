@@ -103,11 +103,11 @@ Processes can be considered the functions of your Nextflow project. You pass par
 
 If we keep the same main.nf, probably our most basic Nextflow process can be written as this:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  process HELLO_WORLD{  "echo Hello World! > output.txt"}  `
+`process HELLO_WORLD{  "echo Hello World! > output.txt"}  `
 
 This process outputs _Hello World!_ to a file called output.txt that will be found in the current directory. To run this process, we need to make some small modifications to our main.nf file. It will look like this:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  process PRINT_HELLO_WORLD{        output:                stdout        script:                "echo Hello world!"}workflow {        PRINT_HELLO_WORLD() | view}  `
+`process PRINT_HELLO_WORLD{        output:                stdout        script:                "echo Hello world!"}workflow {        PRINT_HELLO_WORLD() | view}  `
 
 When running our new _main.nf_ as we’ve done above, we get similar output!
 
@@ -115,7 +115,7 @@ As you can see, we’ve added quite a few novel things. To understand the change
 
 Most often, this is how a process will look:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  process < name > {  [ directives ]  input:    < process inputs >  output:    < process outputs >  when:    < condition >  [script|shell|exec]:    < user script to be executed >}  `
+`  process < name > {  [ directives ]  input:    < process inputs >  output:    < process outputs >  when:    < condition >  [script|shell|exec]:    < user script to be executed >}  `
 
 To explain these optional definition blocks briefly:
 
@@ -127,11 +127,11 @@ To explain these optional definition blocks briefly:
 
 For example, here is a real (albeit slightly simplified) example of how I use **Shell** for my R scripts:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  process LOG10P_TO_P_SORT_BOTH {    input:        each(step2_results)    output:        path("results*.regenie")    shell:    final_output = step2_results.getName()    '''#!/usr/bin/env Rscriptlibrary(dplyr)df <- read.table("!{step2_results}", header=TRUE)df <- df %>%    mutate(P = 10 ** -(LOG10P)) %>%    arrange(CHROM, GENPOS)write.table(df, file="!{final_output}", row.names=FALSE, sep="\t", quote = FALSE)    '''}  `
+`  process LOG10P_TO_P_SORT_BOTH {    input:        each(step2_results)    output:        path("results*.regenie")    shell:    final_output = step2_results.getName()    '''#!/usr/bin/env Rscriptlibrary(dplyr)df <- read.table("!{step2_results}", header=TRUE)df <- df %>%    mutate(P = 10 ** -(LOG10P)) %>%    arrange(CHROM, GENPOS)write.table(df, file="!{final_output}", row.names=FALSE, sep="\t", quote = FALSE)    '''}  `
 
-Lastly, E**xec** will allow you to run code as you might in Groovy or in the workflow, for example:
+Lastly, **Exec** will allow you to run code as you might in Groovy or in the workflow, for example:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  process simpleSum {    input:    val x    exec:    println "Hello Mr. $x"}  `
+`process simpleSum {    input:    val x    exec:    println "Hello Mr. $x"}  `
 
 With what we’ve covered about workflows and processes, we can already save a lot of time and struggle with Nextflow. That being said, it’s all the extra sprinkles on top that really make Nextflow a useful skill to have in your tool belt.
 
@@ -153,15 +153,15 @@ Below is a config file that includes everything we’ve spoken about so far. We 
 
 main.nf:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  process PRINT_HELLO_WORLD{        label "simple_message"        publishDir "$params.OutDir/output"        input:                val(message)        output:                val("output.txt")        script:                "echo $message \$TIMES > output.txt"}workflow {        PRINT_HELLO_WORLD(params.message)}  `
+`  process PRINT_HELLO_WORLD{        label "simple_message"        publishDir "$params.OutDir/output"        input:                val(message)        output:                val("output.txt")        script:                "echo $message \$TIMES > output.txt"}workflow {        PRINT_HELLO_WORLD(params.message)}  `
 
 nextflow.config:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  dag.enabled = trueparams {        OutDir= "/home/justi"        message = "Hello World!"}process {        withLabel : "simple_message" {                beforeScript = "export TIMES=x5"                cpus = 1                time = "1h"                memory = "4GB"        }}  `
+`  dag.enabled = trueparams {        OutDir= "/home/justi"        message = "Hello World!"}process {        withLabel : "simple_message" {                beforeScript = "export TIMES=x5"                cpus = 1                time = "1h"                memory = "4GB"        }}  `
 
 In the command line, we simply enter the usual:
 
-Plain textANTLR4BashCC#CSSCoffeeScriptCMakeDartDjangoDockerEJSErlangGitGoGraphQLGroovyHTMLJavaJavaScriptJSONJSXKotlinLaTeXLessLuaMakefileMarkdownMATLABMarkupObjective-CPerlPHPPowerShell.propertiesProtocol BuffersPythonRRubySass (Sass)Sass (Scss)SchemeSQLShellSwiftSVGTSXTypeScriptWebAssemblyYAMLXML `  nextflow run main.nf  `
+`  nextflow run main.nf  `
 
 ... and voila!
 
