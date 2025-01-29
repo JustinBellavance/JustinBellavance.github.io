@@ -7,7 +7,7 @@ preview: >-
 image: >-
   https://repository-images.githubusercontent.com/9052236/ecd9481e-f4b3-4324-b832-a08ee1d99564
 ---
-#### Table of Contents
+### Table of Contents
 
 * Why You Should Use Nextflow
 * Requirements before Starting
@@ -15,7 +15,7 @@ image: >-
 * Processes
 * Configuration Files ( + a slightly more complex project)
 
-#### Why should you use Nextflow
+### Why should you use Nextflow
 
 As described on their website, Nextflow is software for “data-driven computational pipelines.” Although not only for bioinformatics, the software has seen the most success and use in this field.
 
@@ -25,7 +25,7 @@ That being said, Nextflow is extremely powerful for these types of analyses, and
 
 Last but not least, Nextflow has dependable [documentation](https://www.nextflow.io/docs/latest/index.html) supported by its populous community of users, making Nextflow quite easy to learn.
 
-#### Requirements before Starting
+### Requirements before Starting
 
 Before following this guide, you will need to install Nextflow.
 
@@ -55,47 +55,56 @@ This is possible by entering this command:
 
 where <your_directory> is to be replaced by entering the value (path) printed by
 
- `pwd `
+`pwd `
 
 in the directory where the _nextflow_ executable file is present.
 
 Finally, to activate your updates without logging out and back in, you can enter
 
-` source ~/.bashrc  `
+`source ~/.bashrc  `
 
 Lastly, just enter
 
-` nextflow -h `
+`nextflow -h `
 
 in your command line to see if it works, as of December 2023, you should get an output resembling this:
 
-![nextflow success](https://cdn-images-1.medium.com/max/1200/1*jzJMjtzui7caPYRNMJcbGA.png)
+![nextflow success](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*jzJMjtzui7caPYRNMJcbGA.png)
 
-#### Workflows and Running Nextflow Files.
+### Workflows and Running Nextflow Files.
 
 In order to get starting with Nextflow, you need to understand two things: **Workflows** and **Processes**. Thankfully, they’re not complicated when we start out.
 
 Workflows are where the bulk of your commands will go. If you’ve used python before, they’re essentially equivalent to:
 
-`if __name__ == "__main__":  print("hello world")  `
+```
+if __name__ == "__main__":
+  print("hello world")
+```
 
 In fact, let’s make the most simple Nextflow project possible. Create a file named _main.nf_ using your favorite text editor.
 
 Inside, we’ll base ourselves off of our Python code above to and write:
 
-` workflow {  println "Hello World"}  `
+```
+  workflow {
+    println "Hello World"
+  }  
+```
 
 save that file, then enter in your command line:
 
-` nextflow run main.nf  `
+`nextflow run main.nf  `
 
 and you should see something like this:
+
+![first_hello_world](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*O4G0qKwSQjlLg308by4vRA.png)
 
 Congratulations! You’ve just ran your first Nextflow project.
 
 If we wanted to improve on this code, it’s important to note that Nextflow is heavily based on the programming language [Groovy](https://groovy-lang.org/). All commands possible in Groovy will be possible in the workflow section of your Nextflow project. Not to mention, the Nextflow team has added some [quality-of-life functions](https://www.nextflow.io/docs/latest/script.html) to help out with common operations.
 
-#### Processes
+### Processes
 
 With our basic workflow up and running, we can move on to the more complicated second half of Nextflow.
 
@@ -103,19 +112,52 @@ Processes can be considered the functions of your Nextflow project. You pass par
 
 If we keep the same main.nf, probably our most basic Nextflow process can be written as this:
 
-`process HELLO_WORLD{  "echo Hello World! > output.txt"}  `
+```
+process HELLO_WORLD{
+    "echo Hello World! > output.txt"
+}  
+```
 
 This process outputs _Hello World!_ to a file called output.txt that will be found in the current directory. To run this process, we need to make some small modifications to our main.nf file. It will look like this:
 
-`process PRINT_HELLO_WORLD{        output:                stdout        script:                "echo Hello world!"}workflow {        PRINT_HELLO_WORLD() | view}  `
+```
+process PRINT_HELLO_WORLD{
+          output:                
+            stdout        
+          
+          script:                
+          "echo Hello world!"
+}
+
+workflow {
+  PRINT_HELLO_WORLD() | view
+}
+
+```
 
 When running our new _main.nf_ as we’ve done above, we get similar output!
+
+![hello world nextflow](https://miro.medium.com/v2/resize:fit:1100/format:webp/1*jqiWqu5FhPRK9psqFiLy6g.png)
 
 As you can see, we’ve added quite a few novel things. To understand the changes, it’s important to note how processes are usually formatted.
 
 Most often, this is how a process will look:
 
-`  process < name > {  [ directives ]  input:    < process inputs >  output:    < process outputs >  when:    < condition >  [script|shell|exec]:    < user script to be executed >}  `
+```  
+process < name > {  
+  [ directives ]  
+  input:    
+    < process inputs >  
+    
+  output:    
+    < process outputs >  
+    
+  when:    
+    < condition >  
+  
+  [script|shell|exec]:    
+  < user script to be executed >}
+```
 
 To explain these optional definition blocks briefly:
 
@@ -127,15 +169,44 @@ To explain these optional definition blocks briefly:
 
 For example, here is a real (albeit slightly simplified) example of how I use **Shell** for my R scripts:
 
-`  process LOG10P_TO_P_SORT_BOTH {    input:        each(step2_results)    output:        path("results*.regenie")    shell:    final_output = step2_results.getName()    '''#!/usr/bin/env Rscriptlibrary(dplyr)df <- read.table("!{step2_results}", header=TRUE)df <- df %>%    mutate(P = 10 ** -(LOG10P)) %>%    arrange(CHROM, GENPOS)write.table(df, file="!{final_output}", row.names=FALSE, sep="\t", quote = FALSE)    '''}  `
+```  
+process LOG10P_TO_P_SORT_BOTH {
+      input:        
+        each(step2_results)    
+      
+      output:        
+        path("results*.regenie")    
+      
+      shell:    
+        final_output = step2_results.getName()
+        
+      '''#!/usr/bin/env Rscript
+      library(dplyr)
+      df <- read.table("!{step2_results}", header=TRUE)
+      df <- df %>%    
+        mutate(P = 10 ** -(LOG10P)) %>%    
+        arrange(CHROM, GENPOS)
+
+      write.table(df, file="!{final_output}", row.names=FALSE, sep="\t", quote = FALSE)    
+      '''
+    }  
+```
 
 Lastly, **Exec** will allow you to run code as you might in Groovy or in the workflow, for example:
 
-`process simpleSum {    input:    val x    exec:    println "Hello Mr. $x"}  `
+```
+process simpleSum {
+      input:    
+        val x    
+      
+      exec:    p
+      orintln "Hello Mr. $x"
+}
+```
 
 With what we’ve covered about workflows and processes, we can already save a lot of time and struggle with Nextflow. That being said, it’s all the extra sprinkles on top that really make Nextflow a useful skill to have in your tool belt.
 
-#### Configuration Files ( + a slightly more complex project)
+### Configuration Files ( + a slightly more complex project)
 
 A good configuration file is magic. You can write far less code, simplify your pipeline and have all important settings in one fille.
 
@@ -153,15 +224,49 @@ Below is a config file that includes everything we’ve spoken about so far. We 
 
 main.nf:
 
-`  process PRINT_HELLO_WORLD{        label "simple_message"        publishDir "$params.OutDir/output"        input:                val(message)        output:                val("output.txt")        script:                "echo $message \$TIMES > output.txt"}workflow {        PRINT_HELLO_WORLD(params.message)}  `
+``` 
+process PRINT_HELLO_WORLD{
+          label "simple_message"
+          publishDir "$params.OutDir/output"
+
+          input:                
+            val(message)    
+
+          output:                
+            val("output.txt") 
+
+          script:                
+          "echo $message \$TIMES > output.txt"
+}
+
+workflow {        
+  PRINT_HELLO_WORLD(params.message)
+}  
+          ```
 
 nextflow.config:
 
-`  dag.enabled = trueparams {        OutDir= "/home/justi"        message = "Hello World!"}process {        withLabel : "simple_message" {                beforeScript = "export TIMES=x5"                cpus = 1                time = "1h"                memory = "4GB"        }}  `
+```
+dag.enabled = true
+params { 
+         OutDir= "/home/justi"        
+         message = "Hello World!"
+         }
+
+process {        
+  withLabel : "simple_message"  { 
+    beforeScript = "export TIMES=x5"
+                    cpus = 1
+                    time = "1h"
+                    memory = "4GB"
+  }
+}
+```
+
 
 In the command line, we simply enter the usual:
 
-`  nextflow run main.nf  `
+`nextflow run main.nf`
 
 ... and voila!
 
