@@ -36,6 +36,11 @@
         },
         {
             "id": "6",
+            "title": "Google Scholar",
+            "link" : "https://scholar.google.ca/citations?user=rvgPzaAAAAAJ&hl=en"
+        },
+        {
+            "id": "7",
             "title": "Email",
             "link": "mailto:justinbellavance@gmail.com"
         }
